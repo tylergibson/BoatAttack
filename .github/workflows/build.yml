@@ -40,17 +40,11 @@ jobs:
       - name: Git LFS Pull
         run: git lfs pull
 
-      # Test
-      #- name: Run tests
-      #  uses: webbertakken/unity-test-runner@v1.3
-      #  with:
-      #    unityVersion: 2019.4.3f1
-
       # Build
       - name: Build project
         uses: webbertakken/unity-builder@v0.10
         with:
-          unityVersion: 2019.4.3f1
+          unityVersion: 2020.2.2f1
           targetPlatform: WebGL
 
       # Output
