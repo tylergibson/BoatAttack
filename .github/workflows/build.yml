@@ -42,7 +42,7 @@ jobs:
 
       # Build
       - name: Build project
-        uses: webbertakken/unity-builder@v0.10
+        uses: webbertakken/unity-builder@v2
         with:
           targetPlatform: WebGL
 
