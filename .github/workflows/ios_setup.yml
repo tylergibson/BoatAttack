@@ -1,0 +1,27 @@
+name: iOS One-Time Setup
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Move config to root dir
+        run: mv config/* .
+      
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true 
+
+      - name: Build iOS
+        shell: bash
+        run: |
+          bundle exec fastlane init_ci
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          MATCH_REPOSITORY: ${{ secrets.MATCH_REPOSITORY }}
+          GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
