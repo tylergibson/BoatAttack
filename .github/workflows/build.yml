@@ -34,10 +34,12 @@ jobs:
       - name: Git LFS Pull
         run: git lfs pull
 
-      - uses: actions/cache@v1.1.0
+      - uses: actions/cache@v2
         with:
           path: Library
-          key: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
 
       # Build
       - name: Build project
