@@ -1,11 +1,15 @@
-name: iOS One-Time Setup
+name: Generate iOS Certs
 
-on: workflow_dispatch
+on:
+  workflow_run:
+    workflows: ["iOS One-Time Setup"]
+    types:
+      - completed
 
 jobs:
-  setup:
+  generate_certs:
     runs-on: macos-latest
-
+    needs: setup
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
@@ -16,7 +20,7 @@ jobs:
       - name: Build iOS
         shell: bash
         run: |
-          bundle exec fastlane init_ci
+          bundle exec fastlane sync_certificates
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           MATCH_REPOSITORY: ${{ secrets.MATCH_REPOSITORY }}
