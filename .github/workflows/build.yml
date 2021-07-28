@@ -34,7 +34,7 @@ jobs:
       - name: Git LFS Pull
         run: git lfs pull
 
-    A- uses: actions/cache@v1.1.0
+      - uses: actions/cache@v1.1.0
         with:
           path: Library
           key: Library
@@ -88,7 +88,6 @@ jobs:
           MATCH_REPOSITORY: ${{ secrets.MATCH_REPOSITORY }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
-          GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
           MATCH_DEPLOY_KEY: ${{ secrets.MATCH_DEPLOY_KEY }}
 
           BUNDLE_ID: ${{ env.BUNDLE_ID }}
