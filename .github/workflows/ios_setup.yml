@@ -19,7 +19,7 @@ jobs:
         run: |
           bundle exec fastlane init_ci
         env:
-          GH_PAT: ${{ secrets.GITHUB_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
           MATCH_REPOSITORY: ${{ secrets.MATCH_REPOSITORY }}
           GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
           APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
