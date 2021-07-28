@@ -5,6 +5,7 @@ on:
     workflows: ["iOS One-Time Setup"]
     types:
       - completed
+  workflow_dispatch:
 
 jobs:
   generate_certs:
