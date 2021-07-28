@@ -1,4 +1,4 @@
-name: Actions 😎
+name: Unity Build
 
 on:
   pull_request: {}
@@ -10,8 +10,8 @@ env:
   UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
 
 jobs:
-  build:
-    name: Build my project ✨
+  unity:
+    name: Build in Unity
     runs-on: ubuntu-latest
     steps:
       # Checkout
@@ -44,12 +44,29 @@ jobs:
       - name: Build project
         uses: webbertakken/unity-builder@v2
         with:
-          targetPlatform: StandaloneWindows 
+          targetPlatform: iOS 
           allowDirtyBuild: true
           # TODO: We need allowDirtyBuild because of our git-lfs asset hash. Maybe commit that?
 
       # Output
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           name: Build
           path: build
+
+  apple:
+    name: Build for Xcode and upload to Apple
+    needs: unity
+    runs-on: macos-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: Build
+
+      - run: unzip build
+
+      - run: ls
+
+      - name: List files
+        working-directory: iOS
+        run: ls
