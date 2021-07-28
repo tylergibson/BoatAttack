@@ -1,5 +1,12 @@
 name: Generate iOS Certs
 
+# We conceptually only want to run this after our one-time setup
+# The setup step adds a deploy key to our secrets, and this needs to be
+# a separate workflow in order to pick up on the new ENV changes
+#
+# A possible future step would be to grab the deploy key value directly from 
+# the output of the previous step instead of relying on ENV, but this works for now.
+
 on:
   workflow_run:
     workflows: ["iOS One-Time Setup"]
@@ -10,7 +17,6 @@ on:
 jobs:
   generate_certs:
     runs-on: macos-latest
-    needs: setup
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
