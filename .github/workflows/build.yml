@@ -1,8 +1,6 @@
 name: Unity Build
 
-on:
-  pull_request: {}
-  push: { branches: [master] }
+on: workflow_dispatch
 
 env:
   UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
