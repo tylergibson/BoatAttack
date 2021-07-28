@@ -9,9 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Move config to root dir
-        run: mv config/* .
-      
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
