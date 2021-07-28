@@ -24,24 +24,3 @@ jobs:
           APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }} # Raw .p8 value
-  sync_certs:
-    runs-on: macos-latest
-    needs: setup
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.6
-          bundler-cache: true 
-
-      - name: Build iOS
-        shell: bash
-        run: |
-          bundle exec fastlane sync_certificates
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-          MATCH_REPOSITORY: ${{ secrets.MATCH_REPOSITORY }}
-          GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
-          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }} # Raw .p8 value
