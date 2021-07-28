@@ -13,17 +13,17 @@ platform :ios do
       issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
       key_content: ENV['APP_STORE_CONNECT_KEY']
     )
-    
+
     match(
       type: "appstore",
       storage_mode: "git",
-      git_url: "git@github.com/#{org}/#{repo}.git"
+      git_url: "git@github.com:#{match_org}/#{match_repo}.git"
     )
 
     match(
       type: "development",
       storage_mode: "git",
-      git_url: "git@github.com/#{org}/#{repo}.git"
+      git_url: "git@github.com:#{match_org}/#{match_repo}.git"
     )
   end
 

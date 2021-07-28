@@ -17,6 +17,7 @@ jobs:
         shell: bash
         run: |
           bundle exec fastlane init_ci
+          bundle exec fastlane sync_certificates
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           MATCH_REPOSITORY: ${{ secrets.MATCH_REPOSITORY }}
