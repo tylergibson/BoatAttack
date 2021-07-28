@@ -6,6 +6,27 @@ path = "iOS/iOS/Unity-iPhone.xcodeproj"
 default_platform(:ios)
 
 platform :ios do
+  desc "Set up codesigning"
+  lane :sync_certificates do
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+      key_content: ENV['APP_STORE_CONNECT_KEY']
+    )
+    
+    match(
+      type: "appstore",
+      storage_mode: "git",
+      git_url: "git@github.com/#{org}/#{repo}.git"
+    )
+
+    match(
+      type: "development",
+      storage_mode: "git",
+      git_url: "git@github.com/#{org}/#{repo}.git"
+    )
+  end
+
   desc "Generate a production IPA"
   lane :build do
     setup_ci
@@ -15,8 +36,7 @@ platform :ios do
       key_content: ENV['APP_STORE_CONNECT_KEY']
     )
 
-    # TODO: Will OTA IPAs require dev or appstore?
-    match(type: "appstore")
+    sync_certificates
 
     update_code_signing_settings(
       use_automatic_signing: false,
@@ -65,12 +85,6 @@ platform :ios do
   end
 
   lane :init_ci do
-    app_store_connect_api_key(
-      key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
-      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
-      key_content: ENV['APP_STORE_CONNECT_KEY']
-    )
-
     github_action(
       api_token: ENV["GH_PAT"],
       org: org,
@@ -79,9 +93,5 @@ platform :ios do
       match_repo: match_repo,
       writable_deploy_key: true
     )
-
-    # TODO: Can we do this on first run immediately after github_action, or does this need to be a subsequent run?
-    match(type: "development")
-    match(type: "appstore")
   end
 end
