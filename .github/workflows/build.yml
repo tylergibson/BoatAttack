@@ -34,14 +34,10 @@ jobs:
       - name: Git LFS Pull
         run: git lfs pull
 
-      - name: Restore Library cache
-        uses: actions/cache@v2
-        id: lib-cache
+    A- uses: actions/cache@v1.1.0
         with:
           path: Library
-          key: Library-Test
-          restore-keys: |
-            Library-
+          key: Library
 
       # Build
       - name: Build project
