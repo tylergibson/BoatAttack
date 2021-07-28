@@ -20,7 +20,7 @@ jobs:
 
       # TODO: We currently have two cache steps.
       # I need to do more research to sort out the correct path forward with both Unity lib caching and git-lfs caching
-      
+
       - uses: actions/cache@v1.1.0
         with:
           path: Library
@@ -63,7 +63,7 @@ jobs:
         with:
           name: Build
 
-      - run: unzip build
+      # - run: unzip build
 
       - run: ls
 
