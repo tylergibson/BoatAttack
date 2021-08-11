@@ -60,6 +60,11 @@ jobs:
     needs: unity
     runs-on: macos-latest
     steps:
+      # We don't need the 'real' project (hence no LFS)
+      # but we need the Gemfile, Fastfile, etc
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - uses: actions/download-artifact@v2
         with:
           name: Build
