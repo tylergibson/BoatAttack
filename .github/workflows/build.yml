@@ -97,10 +97,11 @@ jobs:
           GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
           MATCH_DEPLOY_KEY: ${{ secrets.MATCH_DEPLOY_KEY }}
 
-          BUNDLE_ID: ${{ env.BUNDLE_ID }}
-          APP_NAME: ${{ env.APP_NAME }}
+          # TODO: Read these from Unity project
+          BUNDLE_ID: ${{ secrets.BUNDLE_ID }}
+          APP_NAME: ${{ secrets.APP_NAME }}
           BUILD_NUMBER: ${{ github.run_number }}
-          VERSION: ${{ env.VERSION }}
+          VERSION: ${{ secrets.VERSION }}
 
           # Generate a new .p8 from https://appstoreconnect.apple.com/access/users, then "Keys"
           # I'm trying "App Manager" access
