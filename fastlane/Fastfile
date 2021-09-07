@@ -74,7 +74,7 @@ platform :ios do
 
     build_app(
       project: path, 
-      scheme: "App", 
+      scheme: "Unity-iPhone", 
       output_name: "#{ENV['DISPLAY_NAME']} - #{ENV['VERSION']} (#{ENV['BUILD_NUMBER']}).ipa",
       xcargs: "-allowProvisioningUpdates"
     )
