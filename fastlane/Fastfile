@@ -52,15 +52,19 @@ platform :ios do
     update_code_signing_settings(
       use_automatic_signing: false,
       team_id: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore_team-id"],
-      code_sign_identity: "iPhone Distribution",
+      code_sign_identity: "App Store",
       targets: 'Unity-iPhone',
       path: path,
       profile_name: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore_profile-name"],
       profile_uuid: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore"]
     )
 
-    # TODO: the reference Fastlane issue I was looking at also had an update_project_provisioning step here
-    # I don't know if we have ready access to a .mobileprovision file, so leaving out for now.
+    update_project_provisioning(
+      xcodeproj: path,
+      target_filter: ".*Unity-iPhone.*", 
+      build_configuration: "Release",
+      code_signing_identity: "iPhone Distribution" 
+    )
 
     increment_build_number(
       build_number: ENV["BUILD_NUMBER"],
