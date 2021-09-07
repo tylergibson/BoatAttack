@@ -40,14 +40,27 @@ platform :ios do
 
     sync_certificates
 
+    # Unity's framework has specific requirements around codesigning.
+    # Some tweaks taken from https://github.com/fastlane/fastlane/discussions/17458
+    # (updating all codesigning to automatic, then specifically setting codesigning for just the right targets)
+
+    update_code_signing_settings(
+      use_automatic_signing: 'true', 
+      path: path
+    )
+
     update_code_signing_settings(
       use_automatic_signing: false,
       team_id: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore_team-id"],
       code_sign_identity: "iPhone Distribution",
+      targets: 'Unity-iPhone',
       path: path,
       profile_name: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore_profile-name"],
       profile_uuid: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore"]
     )
+
+    # TODO: the reference Fastlane issue I was looking at also had an update_project_provisioning step here
+    # I don't know if we have ready access to a .mobileprovision file, so leaving out for now.
 
     increment_build_number(
       build_number: ENV["BUILD_NUMBER"],
