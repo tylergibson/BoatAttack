@@ -52,12 +52,12 @@ platform :ios do
       profile_uuid: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore"]
     )
 
-    update_project_provisioning(
-      xcodeproj: path,
-      target_filter: ".*Unity-iPhone.*", 
-      build_configuration: "Release",
-      code_signing_identity: "iPhone Distribution" 
-    )
+    # update_project_provisioning(
+    #   xcodeproj: path,
+    #   target_filter: ".*Unity-iPhone.*", 
+    #   build_configuration: "Release",
+    #   code_signing_identity: "iPhone Distribution" 
+    # )
 
     increment_build_number(
       build_number: ENV["BUILD_NUMBER"],
