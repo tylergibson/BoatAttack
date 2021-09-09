@@ -87,7 +87,7 @@ jobs:
           ssh-add - <<< "${MATCH_DEPLOY_KEY}"
           sudo chmod 755 iOS/iOS/MapFileParser.sh
           sudo chmod 755 iOS/iOS/process_symbols.sh 
-          bundle exec fastlane testflight
+          bundle exec fastlane testflight_beta
           
         env:
           FASTLANE_USER: ${{ secrets.APPLE_ID }}
