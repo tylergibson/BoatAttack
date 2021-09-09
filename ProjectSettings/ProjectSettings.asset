@@ -171,9 +171,9 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.Unity3d.BoatAttackDay
-    Lumin: com.DefaultCompany.BoatAttack
-    Standalone: com.UnityTechnologies.BoatAttack
+    Android: com.lazerwalker.BoatAttack
+    Lumin: com.lazerwalker.BoatAttack
+    Standalone: com.lazerwalker.BoatAttack
     iPhone: com.lazerwalker.BoatAttack
   buildNumber:
     Standalone: 0
