@@ -56,7 +56,7 @@ jobs:
           path: build
 
   apple:
-    name: Build for Xcode
+    name: Build for Xcode and Upload to TestFlight
     needs: unity
     runs-on: macos-latest
     steps:
@@ -87,7 +87,7 @@ jobs:
           ssh-add - <<< "${MATCH_DEPLOY_KEY}"
           sudo chmod 755 iOS/iOS/MapFileParser.sh
           sudo chmod 755 iOS/iOS/process_symbols.sh 
-          bundle exec fastlane build
+          bundle exec fastlane testflight
           
         env:
           FASTLANE_USER: ${{ secrets.APPLE_ID }}
