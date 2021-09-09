@@ -1,4 +1,4 @@
-name: Unity Build
+name: TestFlight Build and Deploy
 
 on: workflow_dispatch
 
