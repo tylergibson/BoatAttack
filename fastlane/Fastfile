@@ -45,7 +45,7 @@ platform :ios do
     update_code_signing_settings(
       use_automatic_signing: false,
       team_id: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore_team-id"],
-      code_signing_identity: "iPhone Distribution" 
+      code_signing_identity: "iPhone Distribution",
       targets: 'Unity-iPhone',
       path: path,
       profile_name: ENV["sigh_#{ENV['BUNDLE_ID']}_appstore_profile-name"],
