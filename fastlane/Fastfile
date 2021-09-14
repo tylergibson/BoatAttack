@@ -73,7 +73,9 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :testflight_beta do
     build
-    upload_to_testflight
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true
+    )
   end
 
   desc "Push a new build to the App Store"
