@@ -9,8 +9,13 @@ env:
 
 jobs:
   unity:
-    name: Build in Unity
+    name: Unity build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        targetPlatform:
+          - iOS
+          - Android
     steps:
       # Checkout
       - name: Checkout repository
@@ -45,15 +50,15 @@ jobs:
       - name: Build project
         uses: webbertakken/unity-builder@v2
         with:
-          targetPlatform: iOS 
+          targetPlatform: ${{ matrix.targetPlatform }} 
           allowDirtyBuild: true
           # TODO: We need allowDirtyBuild because of our git-lfs asset hash. Maybe commit that?
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: build
+          name: Build-${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
 
   apple:
     name: Build for Xcode
@@ -67,7 +72,7 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: Build
+          name: Build-iOS
 
       - run: ls
 
