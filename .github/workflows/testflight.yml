@@ -67,7 +67,7 @@ jobs:
 
       - uses: actions/download-artifact@v2
         with:
-          name: Build
+          name: Build-iOS
 
       - run: ls
 
@@ -85,8 +85,8 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${MATCH_DEPLOY_KEY}"
-          sudo chmod 755 iOS/iOS/MapFileParser.sh
-          sudo chmod 755 iOS/iOS/process_symbols.sh 
+          sudo chmod 755 iOS/MapFileParser.sh
+          sudo chmod 755 iOS/process_symbols.sh 
           bundle exec fastlane testflight_beta
           
         env:
