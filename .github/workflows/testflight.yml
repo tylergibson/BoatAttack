@@ -52,8 +52,8 @@ jobs:
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: build
+          name: Build-iOS
+          path: build/iOS
 
   apple:
     name: Build for Xcode and Upload to TestFlight
