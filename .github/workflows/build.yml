@@ -77,7 +77,7 @@ jobs:
       - run: ls
 
       - name: List files
-        working-directory: iOS
+        working-directory: Build-iOS
         run: ls
       
       - uses: ruby/setup-ruby@v1
@@ -90,8 +90,8 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add - <<< "${MATCH_DEPLOY_KEY}"
-          sudo chmod 755 Build-iOS/iOS/MapFileParser.sh
-          sudo chmod 755 Build-iOS/iOS/process_symbols.sh 
+          sudo chmod 755 iOS/MapFileParser.sh
+          sudo chmod 755 iOS/process_symbols.sh 
           bundle exec fastlane build
           
         env:
