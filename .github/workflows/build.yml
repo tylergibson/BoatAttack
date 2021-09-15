@@ -77,7 +77,11 @@ jobs:
       - run: ls
 
       - name: List files
-        working-directory: Build-iOS
+        working-directory: iOS
+        run: ls
+
+      - name: List files
+        working-directory: iOS/iOS
         run: ls
       
       - uses: ruby/setup-ruby@v1
