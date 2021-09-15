@@ -1,7 +1,8 @@
 org, repo = ENV["GITHUB_REPOSITORY"].split("/")
 match_org, match_repo = ENV["MATCH_REPOSITORY"].split("/")
 
-path = "iOS/iOS/Unity-iPhone.xcodeproj"
+# TODO: Parameterize the build folder path
+path = "Build-iOS/iOS/Unity-iPhone.xcodeproj"
 
 default_platform(:ios)
 
