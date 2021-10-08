@@ -1,4 +1,4 @@
-name: App Store Build and Deploy
+name: TestFlight Build and Deploy
 
 on: workflow_dispatch
 
@@ -56,7 +56,7 @@ jobs:
           path: build/iOS
 
   apple:
-    name: Build for Xcode and Upload to TestFlight
+    name: Build for Xcode and Upload to the App Store
     needs: unity
     runs-on: macos-latest
     steps:
@@ -87,7 +87,7 @@ jobs:
           ssh-add - <<< "${MATCH_DEPLOY_KEY}"
           sudo chmod 755 iOS/MapFileParser.sh
           sudo chmod 755 iOS/process_symbols.sh 
-          bundle exec fastlane app_store
+          bundle exec fastlane testflight_beta
           
         env:
           FASTLANE_USER: ${{ secrets.APPLE_ID }}
