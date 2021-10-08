@@ -17,7 +17,7 @@ All of the instructions that follow are based around configuring your repo to bu
 
 **If you're just poking around at this repo or want to use it as a jumping-off point**, you can fork this repo as-is. You can skip the next section ("Set up Ruby"), but will need to complete the rest of the setup sections.
 
-### Set up Ruby
+### Set up Ruby in your repo and copy over files
 You can skip this step if you've forked this repo instead of setting up your own existing project.
 
 This project relies on [Fastlane](https://fastlane.tools) for iOS and Android building and codesigning. Since Fastlane is a Ruby-based tool, we need to start by doing a little Ruby setup.
@@ -36,7 +36,9 @@ You'll need to have your GitHub repo open in an environment where you have a bas
 
 
 ### Set Up A Code-Signing Repo
-This project uses [Fastlane Match](https://codesigning.guide) to store your Apple code-signing certificates and provisioning profiles in an encrypted git repo. The alternative is manually storing and passing around certificate files; this makes things much easier.
+This project uses [Fastlane Match](https://codesigning.guide) to store your Apple code-signing certificates and provisioning profiles in an encrypted git repo. The alternative is manually storing and passing around certificate files; this makes things much easier. 
+
+After successfully following all of these steps, you will have an encrypted git repo containing a valid code-signing certificate and provisioning profile for your game, which is what we will need to automatically code-sign your game and upload it to Apple all using GitHub Actions (in the next section).
 
 1. Create a new private repo on GitHub.
 
@@ -55,7 +57,7 @@ This project uses [Fastlane Match](https://codesigning.guide) to store your Appl
 8. Now that we've done all this work, we can run our setup GitHub Action workflow! Go to the "Actions" tab in the GitHub repo, and run the "iOS One-Time Setup" workflow name by click on the workflow, clicking the "Run Workflow" button, and then clicking the second "Run Workflow" button after confirming you're running it on the git branch you've just done all this configuration on. 
 
 ### Building Your iOS and Android App
-Now that we've done all that setup work, and generated code-signing certificates for iOS, we can actually build your game for iOS and Android!
+Now that we've done all that setup work, and generated code-signing certificates for iOS, we can actually build your game for iOS and Android! By the end of this section, you will have successfully run a GitHub Actions workflow to build your game for iOS and Android, code-sign your iOS build, and upload that build to Apple for TestFlight or App Store distribution.
 
 1. Add three more Repository Secrets: `APP_NAME`, `BUILD_NUMBER`, and `VERSION`, containing the user-friendly display name for your game and the current version and build numbers (TODO: Pull this directly from Unity config files instead of requiring people to manually enter it).
 
@@ -63,7 +65,7 @@ Now that we've done all that setup work, and generated code-signing certificates
 
 3. Assuming you have a Unity Pro license, create three Repository Secrets: `UNITY_EMAIL`, `UNITY_PASSWORD`, and `UNITY_SERIAL`, containing your Unity login credentials (email address and password) as well as your Serial Key, which can be found at https://id.unity.com/en/subscriptions if logged in. (TODO: Add instructions for Personal licenses. This repo already contains a workflow for the manual activation step.)
 
-4.. As written, the GitHub Actions workflows in this repo will build for iOS and Android, including uploading the resulting Android APK as a build artifact. If you want to change this, open `.github/workflows/build.yml`. Near the top of the file will be a section that reads as follows:
+4. As written, the GitHub Actions workflows in this repo will build for iOS and Android, including uploading the resulting Android APK as a build artifact. If you want to change this, open `.github/workflows/build.yml`. Near the top of the file will be a section that reads as follows:
 ```
     strategy:
       matrix:
@@ -82,8 +84,10 @@ Feel free to modify this as desired by adding or removing any number of [support
 
 ## Roadmap
 There are a few big items I'm hoping to add to this in the short term
+* Run through these steps on a brand new fork of this project as well as an existing unrelated Unity project, confirming they work as expected
 * Potentially add full support for uploading to the Google Play store, although this is slightly involved since you need to manually upload at least one build to Google before they will let you automate it
 * Abstract out a lot of the setup, automating a few more steps than currently are and likely extracting at least some of this into third-party GitHub Actions that developers can consume from their own workflows.
 * More clearly document the current limitations to GitHub Actions that may get in your way when using this workflow on larger-scale projects
+* Write out more about how Git-LFS intersects with this, and confirm whether this repo will work as-is when forked if you don't have any GitHub git-lfs data packs.
 
 **If you've made it this far, thanks for your interest!** This is very much a work-in-progress, and I'd love your feedback. If you're trying to set this up and are running into issues, feel free to open up a GitHub Issue here and I'd legitimately love to help you solve it so I can iron out the kinks in this setup process.
