@@ -16,7 +16,7 @@ jobs:
         targetPlatform:
           - iOS
           - Android
-          - Windows
+          - StandaloneWindows
           - WebGL
     steps:
       # Checkout
