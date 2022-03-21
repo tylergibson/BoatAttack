@@ -2,7 +2,7 @@ name: Unity Build
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
 
 env:
   UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
