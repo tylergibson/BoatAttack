@@ -1,6 +1,8 @@
 name: Unity Build
 
-on: workflow_dispatch
+on:
+  push:
+    branches: ["main"]
 
 env:
   UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
