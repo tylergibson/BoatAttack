@@ -83,7 +83,6 @@ Feel free to modify this as desired by adding or removing any number of [support
 
 ## Roadmap
 There are a few big items I'm hoping to add to this in the short term
-* Run through these steps on a brand new fork of this project as well as an existing unrelated Unity project, confirming they work as expected
 * Potentially add full support for uploading to the Google Play store, although this is slightly involved since you need to manually upload at least one build to Google before they will let you automate it
 * Abstract out a lot of the setup, automating a few more steps than currently are and likely extracting at least some of this into third-party GitHub Actions that developers can consume from their own workflows.
 * More clearly document the current limitations to GitHub Actions that may get in your way when using this workflow on larger-scale projects
