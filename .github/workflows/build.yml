@@ -56,6 +56,7 @@ jobs:
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
           allowDirtyBuild: true
+          androidAppBundle: true
           # TODO: We need allowDirtyBuild because of our git-lfs asset hash. Maybe commit that?
 
       # Output
