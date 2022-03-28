@@ -3,8 +3,8 @@ name: Android Build and Internal Play Store Publish
 on: workflow_dispatch
 
 jobs:
-  buildForAndroidPlatform:
-    name: Build For Android Platform
+  buildForAndroid:
+    name: Build For Android
     runs-on: ubuntu-latest
     steps:
         uses: actions/checkout@v2
