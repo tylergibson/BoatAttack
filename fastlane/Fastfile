@@ -6,6 +6,11 @@ path = "iOS/Unity-iPhone.xcodeproj"
 
 default_platform(:ios)
 
+platform :android do
+  package_name(ENV["ANDROID_PACKAGE_NAME"])
+  json_key_file(ENV["GOOGLE_PLAY_KEY_FILE_PATH"])
+end
+
 platform :ios do
   desc "Set up codesigning"
   lane :sync_certificates do
