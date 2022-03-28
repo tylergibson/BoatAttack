@@ -44,8 +44,6 @@ jobs:
         uses: webbertakken/unity-builder@v2
         with:
           targetPlatform: iOS 
-          allowDirtyBuild: true
-          # TODO: We need allowDirtyBuild because of our git-lfs asset hash. Maybe commit that?
 
       # Output
       - uses: actions/upload-artifact@v2
