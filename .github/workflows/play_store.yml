@@ -1,3 +1,7 @@
+name: Android Build and Internal Play Store Publish
+
+on: workflow_dispatch
+
 jobs:
   buildForAndroid:
     name: Build For Android
