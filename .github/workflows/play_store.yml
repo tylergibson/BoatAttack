@@ -34,7 +34,7 @@ jobs:
           restore-keys: |
             Library-
 
-      - uses: game-ci/unity-builder@v2
+      - uses: game-ci/unity-builder@latest
         with:
           targetPlatform: Android
           androidAppBundle: true
