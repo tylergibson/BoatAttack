@@ -1,11 +1,21 @@
 name: Generate iOS Certs
 
-# We conceptually only want to run this after our one-time setup
-# The setup step adds a deploy key to our secrets, and this needs to be
-# a separate workflow in order to pick up on the new ENV changes
+# NOTE FOR FUTURE ME
+# 
+# We conceptually only want to run this after our one-time setup.
+# The setup step adds a deploy key to our secrets, and we need access to that deploy key.
 #
-# A possible future step would be to grab the deploy key value directly from 
-# the output of the previous step instead of relying on ENV, but this works for now.
+# Unfortunately, GitHub Actions seems to fetch "secrets" once, when first parsing a .yml file
+# This means, if we shove these two jobs into the same file, this second job doesn't have access to
+# the not-created-yet secret.
+# 
+# Two possible long-term solutions here:
+# 1. Make the "iOS One-Time Setup" job export the deploy key as an output.
+#    This would unfortunately involve updating the fastlane plugin to output the key as an env var, 
+#    then add an additional command to output that env var as a step output
+# 2. Make this workflow job make a GitHub API call to fetch the match deploy key
+#    Since we already have a valid personal access token in this workflow, 
+#    This seems less effortful than something requiring an upstream PR to a third-party library
 
 on:
   workflow_run:
