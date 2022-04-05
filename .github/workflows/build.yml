@@ -74,13 +74,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: Build-iOS
-
-      - run: ls
-
-      - name: List files
-        working-directory: iOS
-        run: ls
-      
+              
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
