@@ -23,3 +23,30 @@ jobs:
           APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }} # Raw .p8 value
+
+  generate_certs:
+    needs: setup
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true 
+
+      - name: Build iOS
+        shell: bash
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${MATCH_DEPLOY_KEY}"
+          bundle exec fastlane sync_certificates
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          MATCH_REPOSITORY: ${{ secrets.MATCH_REPOSITORY }}
+          GITHUB_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }} # Raw .p8 value
+          MATCH_DEPLOY_KEY: ${{ secrets.MATCH_DEPLOY_KEY }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          BUNDLE_ID: ${{ secrets.BUNDLE_ID }} # TODO: Read this from Unity project
