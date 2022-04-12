@@ -78,12 +78,13 @@ Feel free to modify this as desired by adding or removing any number of [support
 
 5. To specifically build your iOS app and upload it to TestFlight, go to the Actions tab of your repo and run the "TestFlight Build and Deploy" workflow. This will compile the Unity project into an Xcode project and compile the Xcode project on Mac hardware (as in the "Unity Build" workflow), but then it will also codesign your app, upload it to Apple, and mark it as a TestFlight build. Note that, once this workflow is completed, it still may take some time for your build to show up in App Store Connect, as Apple can take an indeterminate amount of time (frequently minutes to hours) to process your build. If you want the workflow to not be marked as "completed" until the build has finished processing on Apple's end, you can change the `skip_waiting_for_build_processing` flag in the `testflight_beta` lane of the `Fastfile`, but note that if Apple takes too long this might cause the build to time out and be marked as a failing build (despite successfully uploading to Apple).  
 
-6. If you are trying to submit a build to the App Store, there is also an "App Store Build and Deploy" workflow that works the same way as the TestFlight one. (TODO: I've tested this on other similar projects, but not on a stock copy of this repo.)
+6. If you are trying to submit a build to the App Store, there is also an "App Store Build and Deploy" workflow that works the same way as the TestFlight one. 
+
+7. Similarly, there's a Play Store build for Android. By default it submits a draft build to the "internal" test track, but that can be changed in the `play_store.yml` workflow and the `Fastfile`. More steps are needed for prepping Android builds, but for now my documentation efforts are focused on the official GameCI docs rather than this README.
 
 
 ## Roadmap
 There are a few big items I'm hoping to add to this in the short term
-* Potentially add full support for uploading to the Google Play store, although this is slightly involved since you need to manually upload at least one build to Google before they will let you automate it
 * Abstract out a lot of the setup, automating a few more steps than currently are and likely extracting at least some of this into third-party GitHub Actions that developers can consume from their own workflows.
 * More clearly document the current limitations to GitHub Actions that may get in your way when using this workflow on larger-scale projects
 * Write out more about how Git-LFS intersects with this, and confirm whether this repo will work as-is when forked if you don't have any GitHub git-lfs data packs.
