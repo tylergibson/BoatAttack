@@ -9,13 +9,14 @@ name: Generate iOS Certs
 # This means, if we shove these two jobs into the same file, this second job doesn't have access to
 # the not-created-yet secret.
 # 
-# Two possible long-term solutions here:
-# 1. Make the "iOS One-Time Setup" job export the deploy key as an output.
-#    This would unfortunately involve updating the fastlane plugin to output the key as an env var, 
-#    then add an additional command to output that env var as a step output
-# 2. Make this workflow job make a GitHub API call to fetch the match deploy key
-#    Since we already have a valid personal access token in this workflow, 
-#    This seems less effortful than something requiring an upstream PR to a third-party library
+# The only long-term solution I can see is having the "iOS One-Time Setup" job export the deploy key as an output.
+# This would unfortunately involve updating the fastlane plugin to output the key as an env var, 
+# then add an additional command to output that env var as a step output
+# 
+# I experimented with having this workflow hit the GitHub API to fetch the deploy key, 
+# since that can happen at runtime, but the GH API intentionally does not return raw repo secret values.
+# They are ONLY able to be accessed by GH-maintained workflow infrastructure, and thus
+# can only be fetched at the start of a workflow run.
 
 on:
   workflow_run:
